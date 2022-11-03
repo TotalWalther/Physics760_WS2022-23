@@ -133,7 +133,7 @@ def m_h_5():
     global N_y
     global h
     E=20 #amount of points for the graph
-    I=20 #initialization
+    I=10 #initialization
     A=10 #autocorrelationcorrection
     C=500 #Number of components for an ensemble
     D=5
@@ -219,7 +219,7 @@ def abs_m_J_7():
     E=16 #amount of points for the graph
     I=10 #initialization
     A=10 #autocorrelationcorrection
-    C=100 #Number of components for an ensemble
+    C=1000 #Number of components for an ensemble
     D=5
     lattice=init_2D()
     colours=['b','g','r','c','m','y','k']   
@@ -247,18 +247,18 @@ def abs_m_J_7():
             print(J)
             final[j]=abs_m/C
             #show_lattice(lattice)
-        plt.plot(np.arange(0.25,1.05,0.05),final,color=colours[m+1],label='$N_x=N_y=$%s'%str((m+1)*4))
+        plt.plot(np.arange(0.25,1.05,0.05)**(-1),final,color=colours[m+1],label='$N_x=N_y=$%s'%str((m+1)*4))
     print(abs_m_theo_array)
-    plt.plot(np.arange(0.25,1.05,0.05),abs_m_theo_array,label='$N_x=N_y=\infty$ (theo)')
+    plt.plot(np.arange(0.25,1.05,0.05)**(-1),abs_m_theo_array,label='$N_x=N_y=\infty$ (theo)')
     # plt.gca().invert_xaxis()
-    # plt.gca().invert_yaxis()
+    plt.gca().invert_yaxis()
     plt.legend()
-    plt.xlabel(r"$J$")
+    plt.xlabel(r"$J^{-1}$")
     plt.ylabel(r"$\langle |m|\rangle (J)$")
     plt.show()  
    
-#m_h_5()
-#eps_J_6()
+# m_h_5()
+# eps_J_6()
 abs_m_J_7()
         
     
