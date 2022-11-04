@@ -16,7 +16,7 @@ N_x=10
 N_y=10
 h=0.0
 T=1
-J=0.5
+J=0.5/T
 
 def init_2D(): #erzeugt ein LxL-Gitter, wobei ein initialer Kaltstart gewählt wird 
     global N_x
@@ -80,7 +80,7 @@ def show_lattice(lattice): #gibt die Matrix des Gitters als Pfeile auf den Gitte
     plt.figure(figsize=(6,6), dpi=400)
     Q = plt.quiver(X, Y, U, V, units='width')
     plt.quiverkey(Q, 0.1, 0.1, 1, r'.' , labelpos='E',
-                    coordinates='figure')
+                    coordinates='figure')   
     
     plt.axis('off')
 #    plt.savefig('Abbildungen/Gitter_%s.png' %(str(T)))
@@ -134,8 +134,8 @@ def m_h_5():
     global h
     E=20 #amount of points for the graph
     I=10 #initialization
-    A=10 #autocorrelationcorrection
-    C=500 #Number of components for an ensemble
+    A=2 #autocorrelationcorrection
+    C=10000 #Number of components for an ensemble
     D=5
     final_M=np.zeros(E+1) 
     M=0
@@ -172,8 +172,8 @@ def eps_J_6():
 
     E=16 #amount of points for the graph
     I=10 #initialization
-    A=10 #autocorrelationcorrection
-    C=100 #Number of components for an ensemble
+    A=2 #autocorrelationcorrection
+    C=1000 #Number of components for an ensemble
     D=5
     lattice=init_2D()
     colours=['b','g','r','c','m','y','k']   
@@ -217,9 +217,9 @@ def abs_m_J_7():
     
 
     E=16 #amount of points for the graph
-    I=10 #initialization
-    A=10 #autocorrelationcorrection
-    C=1000 #Number of components for an ensemble
+    I=5 #initialization
+    A=2 #autocorrelationcorrection
+    C=10000 #Number of components for an ensemble
     D=5
     lattice=init_2D()
     colours=['b','g','r','c','m','y','k']   
@@ -235,7 +235,7 @@ def abs_m_J_7():
         N_x=N_y=(m+1)*4
         final=np.zeros(E)
         for j in range(E):
-            J=0.25+(j*0.75/(E-1))
+            J=(0.25+(j*0.75/(E-1)))/T
             lattice=init_2D()
             abs_m=0
             for i in range(I): 
@@ -247,18 +247,16 @@ def abs_m_J_7():
             print(J)
             final[j]=abs_m/C
             #show_lattice(lattice)
-        plt.plot(np.arange(0.25,1.05,0.05)**(-1),final,color=colours[m+1],label='$N_x=N_y=$%s'%str((m+1)*4))
+        plt.plot((np.arange(0.25,1.05,0.05)/T)**(-1),final,color=colours[m+1],label='$N_x=N_y=$%s'%str((m+1)*4))
     print(abs_m_theo_array)
-    plt.plot(np.arange(0.25,1.05,0.05)**(-1),abs_m_theo_array,label='$N_x=N_y=\infty$ (theo)')
-    # plt.gca().invert_xaxis()
-    plt.gca().invert_yaxis()
+    plt.plot((np.arange(0.25,1.05,0.05)/T)**(-1),abs_m_theo_array,label='$N_x=N_y=\infty$ (theo)')
     plt.legend()
     plt.xlabel(r"$J^{-1}$")
     plt.ylabel(r"$\langle |m|\rangle (J)$")
     plt.show()  
    
-# m_h_5()
-# eps_J_6()
-abs_m_J_7()
+m_h_5()
+#eps_J_6()
+#abs_m_J_7()
         
     
