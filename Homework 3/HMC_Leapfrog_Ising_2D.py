@@ -47,8 +47,6 @@ phi_0=.5
 H_0=H(p_0,phi_0)
 for i in range(100):
     p,phi=leapfrog(p_0,phi_0,i+2)
-    print(p)
-    print(phi)
     plt.plot(i+2,abs((H(p,phi)-H_0)/H_0), 'x')
 plt.semilogy()    
 plt.show()    
