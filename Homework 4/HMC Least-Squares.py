@@ -15,6 +15,11 @@ import scipy.optimize as so
 import scipy.special as sp
 import mpmath as mp
 
+import os
+import openai
+
+openai.api_key = "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"
+
 
 
 
@@ -177,6 +182,6 @@ def markov_chain():
     plt.plot(.134977,939.5,'x', color='r')
     plt.show()
 
-#leapfrog_plot()
-#N_md=30
+leapfrog_plot()
+N_md=30
 markov_chain()
